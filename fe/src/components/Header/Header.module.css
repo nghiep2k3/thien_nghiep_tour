@@ -1,0 +1,83 @@
+.Container {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+    height: 50px;
+    width: 100%;
+    position: fixed;
+}
+
+.Item {
+    cursor: pointer;
+    color: #444;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 9px 20px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+/* Hamburger button */
+.Hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #444;
+    cursor: pointer;
+}
+
+/* Menu mặc định ẩn */
+.Menu {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Ẩn phần giờ làm việc trên màn hình nhỏ */
+.WorkingHours {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .Menu {
+        display: none; /* Ẩn các item trên điện thoại */
+        flex-direction: column;
+        position: absolute;
+        top: 36px;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        z-index: 10;
+        padding: 12px;
+    }
+
+    /* Hiển thị menu khi nhấn vào nút 3 gạch */
+    .ShowMenu {
+        display: flex;
+    }
+
+    .Hamburger {
+        display: block; /* Chỉ hiện nút 3 gạch trên thiết bị di động */
+    }
+
+    .Item {
+        width: 100%; /* Các item sẽ chiếm toàn bộ chiều ngang */
+        margin-bottom: 10px;
+    }
+
+    .Container {
+        justify-content: space-between;
+        height: auto;
+    }
+
+    /* Ẩn phần giờ làm việc trên màn hình nhỏ */
+    .WorkingHours {
+        display: none !important;
+    }
+}
