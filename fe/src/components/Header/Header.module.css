@@ -6,12 +6,17 @@
     padding: 0 12px;
     height: 50px;
     width: 100%;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    left: 0;
     position: fixed;
 }
 
 .Item {
     cursor: pointer;
     color: #444;
+    z-index: 999;
     border: 1px solid #fff;
     border-radius: 8px;
     font-size: 16px;
@@ -35,8 +40,11 @@
 
 /* Menu mặc định ẩn */
 .Menu {
+    z-index: 999;
     display: flex;
     flex-wrap: wrap;
+    max-height: none; /* Không giới hạn chiều cao trên màn hình lớn */
+    transition: none; /* Không cần hiệu ứng trên màn hình lớn */
 }
 
 /* Ẩn phần giờ làm việc trên màn hình nhỏ */
@@ -44,9 +52,12 @@
     display: flex;
 }
 
-@media (max-width: 768px) {
+/* CSS cho màn hình nhỏ */
+@media (max-width: 1164px) {
     .Menu {
-        display: none; /* Ẩn các item trên điện thoại */
+        max-height: 0;
+        overflow: hidden; /* Ẩn menu khi chưa mở */
+        transition: max-height 0.5s ease-out;
         flex-direction: column;
         position: absolute;
         top: 36px;
@@ -54,16 +65,15 @@
         width: 100%;
         background-color: #fff;
         z-index: 10;
-        padding: 12px;
     }
 
     /* Hiển thị menu khi nhấn vào nút 3 gạch */
     .ShowMenu {
-        display: flex;
+        max-height: 500px;
     }
 
     .Hamburger {
-        display: block; /* Chỉ hiện nút 3 gạch trên thiết bị di động */
+        display: block; /* Hiển thị nút Hamburger chỉ trên màn hình nhỏ */
     }
 
     .Item {
@@ -73,10 +83,25 @@
 
     .Container {
         justify-content: space-between;
-        height: auto;
+        height: 50px;
     }
 
-    /* Ẩn phần giờ làm việc trên màn hình nhỏ */
+    .WorkingHours {
+        display: none !important;
+    }
+}
+
+/* Điều chỉnh thêm cho các kích thước trung bình */
+@media (min-width: 1165px) and (max-width: 1315px) {
+    .Item {
+        display: flex;
+    }
+
+    .Container {
+        justify-content: space-between;
+        height: 50px;
+    }
+
     .WorkingHours {
         display: none !important;
     }

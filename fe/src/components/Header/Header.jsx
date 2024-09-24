@@ -7,7 +7,7 @@ export default function Header() {
     const iconMapping = {
         home: 'fa-house',
         promotion: 'fa-gifts',
-        tour: 'fa-plane',
+        tour: 'fa-plane-departure',
         cruise: 'fa-ship',
         hotel: 'fa-hotel',
     };
@@ -33,12 +33,12 @@ export default function Header() {
         fetchData();
     }, []);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div className={styles.Container}></div>;
     if (error) return <div>Error: {error.message}</div>;
 
     return (
         <div className={styles.Container}>
-            <div className='text-uppercase fw-bold fs-5 text-warning'>Thien nghiep tour</div>
+            <div className='text-uppercase fw-bold fs-5 text-warning'>Thiennghiep tour</div>
             <button className={styles.Hamburger} onClick={() => setMenuOpen(!menuOpen)}>
                 <i className="fa-solid fa-bars"></i>
             </button>
