@@ -42,7 +42,7 @@ export default function Search() {
                                     <p style={{ color: '#444', fontWeight: 500 }}>Vui lòng chọn?</p>
                                 </div>
                             </div>
-                            <Button style={{height: 50, width: 150, background: '#e9680c', color: '#fff', fontSize: 18}} type="primary">Tìm ngay</Button>
+                            <Button style={{ height: 50, width: 150, background: '#e9680c', color: '#fff', fontSize: 18 }} type="primary">Tìm ngay</Button>
                         </div>
                     }
                     {activeTab === 'tour' &&
@@ -61,7 +61,7 @@ export default function Search() {
                                     <p style={{ color: '#444', fontWeight: 500 }}>Vui lòng chọn?</p>
                                 </div>
                             </div>
-                            <Button style={{height: 50, width: 150, background: '#e9680c', color: '#fff', fontSize: 18}} type="primary">Tìm ngay</Button>
+                            <Button style={{ height: 50, width: 150, background: '#e9680c', color: '#fff', fontSize: 18 }} type="primary">Tìm ngay</Button>
                         </div>
                     }
                 </div>

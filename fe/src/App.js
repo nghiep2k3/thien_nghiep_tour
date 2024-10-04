@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import Slider from './components/Carousel/Carousel';
 import Search from './components/Search/Search';
+import ListTourSuggest from './Page/ListTourSuggest/ListTourSuggest';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Header/>
       <Slider/>
       <Search/>
+      <ListTourSuggest/>
     </div>
   );
 }
