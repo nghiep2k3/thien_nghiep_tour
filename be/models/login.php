@@ -1,13 +1,11 @@
 <?php
-class AccountModel {
-    // Khai báo các thuộc tính tương ứng với các trường trong bảng 'account' và 'profile'
+class Login {
+    // Khai báo các thuộc tính
     private $conn;
-    private $table = 'account';
+    private $table = 'sign_up'; // Bảng sign_up
 
-    public $id;
     public $username;
     public $password;
-    public $user_id;
 
     // Constructor để kết nối đến cơ sở dữ liệu
     public function __construct($db) {
@@ -16,19 +14,21 @@ class AccountModel {
 
     // Hàm đăng nhập và lấy thông tin người dùng
     public function login() {
-        // Truy vấn SQL để JOIN bảng 'account' với bảng 'profile' dựa trên 'user_id'
+        // Truy vấn SQL để lấy thông tin username và mật khẩu đã mã hóa từ bảng 'sign_up'
         $query = "SELECT 
-                    a.id AS account_id, 
-                    a.username, 
+                    s.id AS sign_up_id, 
+                    s.name AS real_name, 
+                    s.username, 
+                    s.password,  -- Mật khẩu đã mã hóa
+                    s.role, 
+                    s.create_id, 
                     p.id AS profile_id, 
-                    p.number, 
-                    p.password, 
+                    p.user_id, 
                     p.address, 
-                    p.create_id, 
-                    p.role 
-                  FROM " . $this->table . " a 
-                  LEFT JOIN profile p ON a.user_id = p.id
-                  WHERE a.username = :username AND a.password = :password 
+                    p.number 
+                  FROM " . $this->table . " s 
+                  LEFT JOIN profile p ON s.id = p.user_id
+                  WHERE s.username = :username 
                   LIMIT 1";
 
         // Chuẩn bị truy vấn
@@ -36,7 +36,6 @@ class AccountModel {
 
         // Ràng buộc các giá trị đầu vào
         $stmt->bindParam(':username', $this->username);
-        $stmt->bindParam(':password', $this->password);
 
         // Thực thi truy vấn
         $stmt->execute();
