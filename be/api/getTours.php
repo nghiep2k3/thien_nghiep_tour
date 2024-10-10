@@ -29,7 +29,7 @@ class TourAPI {
                 extract($row);
                 $tour_item = array(
                     'id' => $id,
-                    'id_comment' => $id_comment,
+                    // 'id_comment' => $id_comment,
                     'title' => $title,
                     'description' => $description,
                     'price' => $price,
