@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SuggetsTour from '../../components/SuggetsTour/SuggetsTour';
+import axios from 'axios';
+import url from '../../config';
 
 export default function ListTourSuggest() {
-    const data = [
+    const [data, setData] = useState();
+    const [loading, setLoading] = useState(true);
+    const data2 = [
         {
             id: 1,
             title: 'Tour Du Lịch Mùa Lá Đỏ 2024'
@@ -23,9 +27,12 @@ export default function ListTourSuggest() {
             title: 'Tour Du Lịch Mùa Lá Đỏ 2024'
         },
     ];
+
+
+    
     return (
         <div style={{ marginTop: 150}} className='mx-5 d-flex justify-content-around'>
-            {data.map((item, index) => {
+            {data2.map((item, index) => {
                 return (
                     <SuggetsTour key={index} title={item.title} />
                 )

@@ -1,0 +1,22 @@
+/* box-shadow: 0 0 10px 5px rgba(0, 0, 0, .06); */
+
+.borderPrice{
+    color: #b72020;
+    background-color: transparent;
+    border: 2px solid #b72020;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 6px 10px 4px 10px;
+    border-radius: 4px;
+}
+
+/* CardTour.css */
+/* CardTour.css */
+.text-ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

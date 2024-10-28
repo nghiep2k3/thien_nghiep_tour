@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import styles from './Header.module.css'
+import React, { useState, useEffect } from 'react';
+import styles from './Header.module.css';
 import axios from 'axios';
 import url from '../../config';
+import { Modal } from 'antd';
 
 export default function Header() {
     const iconMapping = {
@@ -11,7 +12,16 @@ export default function Header() {
         cruise: 'fa-ship',
         hotel: 'fa-hotel',
     };
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -43,8 +53,9 @@ export default function Header() {
                 <i className="fa-solid fa-bars"></i>
             </button>
 
-            {/* Chỉ hiện các Item khi menuOpen là true */}
+            {/* Chỉ hiện các Item và input khi menuOpen là true */}
             <div className={`${styles.Menu} ${menuOpen ? styles.ShowMenu : ''}`}>
+                <input type="text" placeholder="Search..." className={styles.SearchInput} />
                 {data.map((item, index) => (
                     <div key={index} className={styles.Item}>
                         <i className={`fa-solid ${iconMapping[item.type]}`}></i> {item.title}
@@ -54,9 +65,18 @@ export default function Header() {
 
             {/* Thêm lớp styles.WorkingHours để điều khiển */}
             <div className={`d-flex ${styles.WorkingHours}`}>
-                Giờ làm việc: <span className='d-flex fw-bold'>8h <i className="ti ti-arrow-right fw-bold"></i> 12h</span>
+                <div className={styles.User} onClick={showModal}>
+                    <i className="fs-5 fa-regular fa-user"></i>
+                </div>
+                <div>
+                    <i className="fs-5 fa-solid fa-magnifying-glass"></i>
+                </div>
             </div>
-
+            <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+            </Modal>
         </div>
     );
 }

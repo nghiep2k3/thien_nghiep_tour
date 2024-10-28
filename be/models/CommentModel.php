@@ -49,6 +49,30 @@ class CommentModel
         return false; // Không tìm thấy comment
     }
 
+    public function updateComment($id, $description, $username)
+    {
+        // Kiểm tra xem comment có thuộc về người dùng không
+        $query = "SELECT username FROM " . $this->table . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            // Nếu username khớp, thực hiện cập nhật
+            if ($row['username'] === $username) {
+                $query = "UPDATE " . $this->table . " SET description = :description WHERE id = :id";
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindParam(':description', $description);
+                $stmt->bindParam(':id', $id);
+                return $stmt->execute();
+            } else {
+                return false; // Tên người dùng không khớp
+            }
+        }
+        return false; // Không tìm thấy comment
+    }
+
 
 }
 ?>

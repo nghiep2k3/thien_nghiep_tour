@@ -84,47 +84,59 @@ class TourModel
 
     // Hàm để lấy thông tin chi tiết tour và các comment liên quan
     public function getTourDetails($tour_id)
-{
-    $query = "SELECT t.*, c.id AS comment_id, c.description AS comment_description, c.image, c.username, c.create_id
+    {
+        $query = "SELECT t.*, c.id AS comment_id, c.description AS comment_description, c.image, c.username, c.create_id
               FROM " . $this->table . " t
               LEFT JOIN comment c ON t.id = c.tour_id
               WHERE t.id = :tour_id";
 
-    $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(':tour_id', $tour_id);
-    $stmt->execute();
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':tour_id', $tour_id);
+        $stmt->execute();
 
-    $tourDetails = [];
-    $comments = [];
+        $tourDetails = [];
+        $comments = [];
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        if (empty($tourDetails)) {
-            $tourDetails = [
-                'id' => $row['id'],
-                'title' => $row['title'],
-                'description' => $row['description'],
-                'price' => $row['price'],
-                'time_frame' => $row['time_frame'],
-                'rate' => $row['rate'],
-                'discount' => $row['discount']
-            ];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if (empty($tourDetails)) {
+                $tourDetails = [
+                    'id' => $row['id'],
+                    'title' => $row['title'],
+                    'description' => $row['description'],
+                    'price' => $row['price'],
+                    'time_frame' => $row['time_frame'],
+                    'rate' => $row['rate'],
+                    'discount' => $row['discount']
+                ];
+            }
+            if ($row['comment_id']) {
+                $comments[] = [
+                    'id' => $row['comment_id'],
+                    'description' => $row['comment_description'],
+                    'username' => $row['username'],
+                    'create_id' => $row['create_id'],
+                    'image' => $row['image']
+                ];
+            }
         }
-        if ($row['comment_id']) {
-            $comments[] = [
-                'id' => $row['comment_id'],
-                'description' => $row['comment_description'],
-                'username' => $row['username'],
-                'create_id' => $row['create_id'],
-                'image' => $row['image']
-            ];
-        }
+
+        // Thêm comments vào thông tin tour
+        $tourDetails['comments'] = $comments;
+
+        return $tourDetails;
     }
 
-    // Thêm comments vào thông tin tour
-    $tourDetails['comments'] = $comments;
 
-    return $tourDetails;
-}
 
+    public function getHotTours()
+    {
+        $query = "SELECT t.* FROM " . $this->table . " t
+                  JOIN tour_hot th ON t.id = th.id_tour";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        return $stmt;
+    }
 }
 ?>

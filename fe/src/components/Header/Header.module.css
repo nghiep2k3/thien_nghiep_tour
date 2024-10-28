@@ -1,3 +1,4 @@
+/* Đặt lại Container */
 .Container {
     background-color: #fff;
     display: flex;
@@ -13,6 +14,7 @@
     position: fixed;
 }
 
+/* Định dạng Item */
 .Item {
     cursor: pointer;
     color: #444;
@@ -28,9 +30,9 @@
     transition: opacity 0.3s ease;
 }
 
-/* Hamburger button */
+/* Nút Hamburger cho màn hình nhỏ */
 .Hamburger {
-    display: none;
+    display: none; /* Ẩn nút hamburger trên màn hình lớn */
     background: none;
     border: none;
     font-size: 24px;
@@ -38,7 +40,7 @@
     cursor: pointer;
 }
 
-/* Menu mặc định ẩn */
+/* Menu mặc định */
 .Menu {
     z-index: 999;
     display: flex;
@@ -47,62 +49,66 @@
     transition: none; /* Không cần hiệu ứng trên màn hình lớn */
 }
 
-/* Ẩn phần giờ làm việc trên màn hình nhỏ */
+/* WorkingHours */
 .WorkingHours {
     display: flex;
+    justify-content: space-between;
+    width: 60px;
+}
+
+/* Input tìm kiếm */
+.SearchInput {
+    display: none;
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
 /* CSS cho màn hình nhỏ */
-@media (max-width: 1164px) {
+@media (max-width: 768px) {
+    .SearchInput{
+        display: flex;
+    }
+    .Hamburger {
+        display: block;
+    }
+    .User {
+        display: none;
+    }
+
     .Menu {
-        max-height: 0;
-        overflow: hidden; /* Ẩn menu khi chưa mở */
-        transition: max-height 0.5s ease-out;
+        display: none; /* Ẩn menu mặc định trên mobile */
         flex-direction: column;
+        align-items: flex-start;
+        background-color: #fff;
         position: absolute;
-        top: 36px;
+        top: 50px;
         left: 0;
         width: 100%;
-        background-color: #fff;
-        z-index: 10;
+        padding: 10px 0;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    /* Hiển thị menu khi nhấn vào nút 3 gạch */
+    /* Hiển thị Menu khi được bật */
     .ShowMenu {
-        max-height: 500px;
-    }
-
-    .Hamburger {
-        display: block; /* Hiển thị nút Hamburger chỉ trên màn hình nhỏ */
-    }
-
-    .Item {
-        width: 100%; /* Các item sẽ chiếm toàn bộ chiều ngang */
-        margin-bottom: 10px;
-    }
-
-    .Container {
-        justify-content: space-between;
-        height: 50px;
-    }
-
-    .WorkingHours {
-        display: none !important;
-    }
-}
-
-/* Điều chỉnh thêm cho các kích thước trung bình */
-@media (min-width: 1165px) and (max-width: 1315px) {
-    .Item {
         display: flex;
     }
 
-    .Container {
-        justify-content: space-between;
-        height: 50px;
+    .Item {
+        font-size: 14px;
+        padding: 10px 15px;
+        margin: 5px 0;
+        width: 100%;
+        text-align: left;
+        border: none;
     }
 
     .WorkingHours {
         display: none !important;
+        align-items: center;
+        gap: 10px;
     }
 }
